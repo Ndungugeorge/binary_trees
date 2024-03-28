@@ -3,19 +3,20 @@
 /**
  * binary_tree_leaves - func counts binary tree leaves
  *
- * @tree: pointer to root node
+ * @tree: pointer to a root
  *
- * Return: reurn 0 if tree is NULL
+ * Return: return 0 if tree is NULL
  */
 size_t binary_tree_leaves(const binary_tree_t *tree)
 {
-	if (tree == NULL)
-		return (0);
-	if (tree->left == NULL && tree->right == NULL)
-		return (1);
+	size_t bt_leaves = 0;
 
-	size_t left = binary_tree_leaves(tree->left);
-	size_t right = binary_tree_leaves(tree->right);
+	if (tree)
+	{
+		bt_leaves += !tree->left && !tree->right ? 1 : 0;
+		bt_leaves += binary_tree_leaves(tree->left);
+		bt_leaves += binary_tree_leaves(tree->right);
+	}
 
-	return (left + right);
+	return (bt_leaves);
 }
